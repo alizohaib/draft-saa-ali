@@ -4,7 +4,7 @@ title: "Extending QUIC for Mid-Connection Server-Side Migration"
 category: info
 
 docname: draft-saa-ali-quic-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: independent  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
@@ -12,9 +12,7 @@ v: 3
 # area: AREA
 # workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - QUIC
 venue:
 #  group: WG
 #  type: Working Group
@@ -36,7 +34,7 @@ informative:
 
 --- abstract
 
-This document proposes an extension to the QUIC transport protocol to enable mid-connection server-side migration. It defines a new QUIC frame, the SERVER_ALTERNATE_ADDRESS frame, allowing servers to dynamically advertise alternate IP addresses to clients. This extension supports use cases such as privacy-preserving address rotation, censorship circumvention, and mid-connection load balancing, expanding beyond the one-time preferred address feature defined in RFC 9000.
+This document proposes an extension to the QUIC transport protocol to enable mid-connection server-side migration. It defines a new QUIC frame, the SERVER_ALTERNATE_ADDRESS frame, allowing servers to dynamically advertise alternate addresses to clients. This extension supports use cases such as privacy-preserving address rotation, censorship circumvention, and mid-connection load balancing, expanding beyond the one-time preferred address feature defined in RFC 9000.
 
 
 
