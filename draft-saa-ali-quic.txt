@@ -2,10 +2,10 @@
 
 
 
-WG Working Group                                               A. Zohaib
-Internet-Draft                                    Your Organization Here
-Intended status: Informational                              1 April 2025
-Expires: 3 October 2025
+Network Working Group                                          A. Zohaib
+Internet-Draft                                             UMass Amherst
+Intended status: Informational                              2 April 2025
+Expires: 4 October 2025
 
 
                          Server-Side Migration
@@ -13,22 +13,26 @@ Expires: 3 October 2025
 
 Abstract
 
-   TODO Abstract
+   This document specifies an extension to the QUIC transport protocol
+   (RFC 9000) to enable mid-connection server-side migration.  It
+   defines a new QUIC frame, the SERVER_ALTERNATE_ADDRESS frame,
+   allowing servers to dynamically advertise alternate IP addresses to
+   clients.  This extension supports use cases such as privacy-
+   preserving address rotation, censorship circumvention, and mid-
+   connection load balancing, expanding beyond the one-time preferred
+   address feature defined in RFC 9000.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-saa-ali-quic/.
-
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   https://alizohaib.github.io/draft-saa-ali/draft-saa-ali-quic.html.
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-saa-ali-quic/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/alizohaib/draft-saa-ali.
 
 Status of This Memo
 
@@ -45,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 October 2025.
+   This Internet-Draft will expire on 4 October 2025.
 
 Copyright Notice
 
@@ -67,13 +71,37 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Security Considerations
    4.  IANA Considerations
-   5.  Normative References
+   5.  References
+     5.1.  Normative References
+     5.2.  Informative References
    Acknowledgments
    Author's Address
 
 1.  Introduction
 
-   TODO Introduction
+   QUIC [QUIC] supports connection migration, allowing endpoints to
+   change addresses (IP address and Port) while preserving connection
+   continuity.  Client Migrations, wherein a client might need to
+   perform a connection migration, are supported at any time during the
+   connection and after the handshake.  However, Server Migrations,
+   where a client may connect to a different server address, are limited
+   to a one-time redirection using the \texttt{preferred_address}
+   transport parameter sent during the handshake.  There is currently no
+   mechanism to migrate a connection to a different server address mid-
+   connection.
+
+   This document proposes a protocol extension enabling servers to
+   dynamically announce alternate addresses during an active connection
+   through the \texttt{SERVER_ALTERNATE_ADDRESS} frame.  This explicit
+   signaling facilitates server-directed client migration to alternate
+   server addresses, enabling use-cases like privacy-preserving address
+   rotation, censorship circumvention, and mid-connection load
+   balancing.
+
+   One of the design goals for this proposal is to be minimally
+   invasive.  It introduces a single new frame type and reuses existing
+   QUIC migration mechanisms.  The aim is to maintain compatibility with
+   existing protocol implementations and ease the path toward adoption.
 
 2.  Conventions and Definitions
 
@@ -91,7 +119,9 @@ Table of Contents
 
    This document has no IANA actions.
 
-5.  Normative References
+5.  References
+
+5.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -102,6 +132,13 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+5.2.  Informative References
+
+   [QUIC]     Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
+
 Acknowledgments
 
    TODO acknowledge.
@@ -109,5 +146,5 @@ Acknowledgments
 Author's Address
 
    Ali Zohaib
-   Your Organization Here
-   Email: your.email@example.com
+   UMass Amherst
+   Email: azohaib@umass.edu
