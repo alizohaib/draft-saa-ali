@@ -1162,6 +1162,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-server-alternate-address-fr" class="internal xref">Server Alternate Address Frame</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-client-behavior" class="internal xref">Client Behavior</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-server-behavior" class="internal xref">Server Behavior</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
@@ -1255,23 +1263,41 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-3-2.1">
 <pre>
-  SERVER_ALTERNATE_ADDRESS Frame {
-   Type (i) = 0xTBD,
-   Sequence Number (i),
-   IPv4 Address (32),
-   IPv4 Port (16),
-   IPv6 Address (128),
-   IPv6 Port (16),
-   Connection ID Length (8),
-   Connection ID (..),
-   Stateless Reset Token (128),
-  }
+SERVER_ALTERNATE_ADDRESS Frame {
+    Type (i) = 0xTBD,
+    Sequence Number (i),
+    IPv4 Address (32),
+    IPv4 Port (16),
+    IPv6 Address (128),
+    IPv6 Port (16),
+    Connection ID Length (8),
+    Connection ID (..),
+    Stateless Reset Token (128),
+}
 
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-server_alternate_address-fr" class="selfRef">SERVER_ALTERNATE_ADDRESS Frame Format</a>
         </figcaption></figure>
+</div>
+<div id="client-behavior">
+<section id="section-3.1">
+        <h3 id="name-client-behavior">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-client-behavior" class="section-name selfRef">Client Behavior</a>
+        </h3>
+<p id="section-3.1-1">This extension introduces a new transport parameter, enable_server_migration (TYPE: TBD), which is included in the handshake to indicate the endpoint's willingness to receive Server Alternate Address (SAA) frames. This parameter has a zero-length value.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">When a client receives an SAA frame, it <span class="bcp14">MAY</span> initiate migration by validating the advertised addresses. This validation is performed based on the client's current IP family and the Connection IDs included in the frame. If validation succeeds, the client migrates the connection to the new address using new Connection IDs, following the same process used for the preferred address transport parameter.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="server-behavior">
+<section id="section-3.2">
+        <h3 id="name-server-behavior">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-server-behavior" class="section-name selfRef">Server Behavior</a>
+        </h3>
+<p id="section-3.2-1">If the client includes the enable_server_migration transport parameter in the handshake, the server sends a SERVER_ALTERNATE_ADDRESS frame. Servers that do not support this feature <span class="bcp14">MAY</span> ignore the client's transport parameters.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Similar to the preferred_address transport parameter, servers <span class="bcp14">MAY</span> provide an alternate address family (e.g., IPv4 or IPv6), allowing clients to choose the one best suited to their network environment.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+</section>
 </div>
 </section>
 </div>
