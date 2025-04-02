@@ -80,24 +80,34 @@ In cloud and data center environments, servers are routinely brought down for up
 SERVER_ALTERNATE_ADDRESS frame is formatted as shown in {{fig-saa-format}}.
 
 ~~~
-  SERVER_ALTERNATE_ADDRESS Frame {
-   Type (i) = 0xTBD,
-   Sequence Number (i),
-   IPv4 Address (32),
-   IPv4 Port (16),
-   IPv6 Address (128),
-   IPv6 Port (16),
-   Connection ID Length (8),
-   Connection ID (..),
-   Stateless Reset Token (128),
-  }
+SERVER_ALTERNATE_ADDRESS Frame {
+    Type (i) = 0xTBD,
+    Sequence Number (i),
+    IPv4 Address (32),
+    IPv4 Port (16),
+    IPv6 Address (128),
+    IPv6 Port (16),
+    Connection ID Length (8),
+    Connection ID (..),
+    Stateless Reset Token (128),
+}
 
 ~~~
 {: #fig-saa-format title="SERVER_ALTERNATE_ADDRESS Frame Format"}
 
 
+## Client Behavior
+
+This extension introduces a new transport parameter, enable_server_migration (TYPE: TBD), which is included in the handshake to indicate the endpoint's willingness to receive Server Alternate Address (SAA) frames. This parameter has a zero-length value.
+
+When a client receives an SAA frame, it MAY initiate migration by validating the advertised addresses. This validation is performed based on the client's current IP family and the Connection IDs included in the frame. If validation succeeds, the client migrates the connection to the new address using new Connection IDs, following the same process used for the preferred address transport parameter.
 
 
+## Server Behavior
+
+If the client includes the enable_server_migration transport parameter in the handshake, the server sends a SERVER_ALTERNATE_ADDRESS frame. Servers that do not support this feature MAY ignore the client's transport parameters.
+
+Similar to the preferred_address transport parameter, servers MAY provide an alternate address family (e.g., IPv4 or IPv6), allowing clients to choose the one best suited to their network environment.
 
 # Conventions and Definitions
 
