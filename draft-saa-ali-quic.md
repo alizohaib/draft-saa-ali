@@ -4,7 +4,7 @@ title: "Extending QUIC for Mid-Connection Server-Side Migration"
 category: info
 
 docname: draft-saa-ali-quic-latest
-submissiontype: independent  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
