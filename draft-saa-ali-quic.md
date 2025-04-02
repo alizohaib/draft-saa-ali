@@ -71,7 +71,30 @@ MASQUE proxies, built on QUIC, can leverage this capability to provide censorshi
 The ability to signal alternate addresses mid-connection also enables fine-grained load balancing strategies. A server that detects impending overload or hardware failure can instruct connected clients to migrate to a different server node within the same cluster. This migration can happen without interrupting the connection, avoiding the need for upper-layer renegotiation or re-authentication. Unlike DNS-based load balancing, this approach operates directly within the transport layer, preserving connection continuity and transport-level performance optimizations.
 
 ## Graceful Failover and Maintenance
+
 In cloud and data center environments, servers are routinely brought down for updates, scaling, or scheduled maintenance. This extension enables graceful failover by allowing a server to notify clients before termination and instruct them to migrate to a backup or replacement node. Because migration occurs at the transport level, application-layer sessions remain uninterrupted.
+
+
+# Server Alternate Address Frame
+
+SERVER_ALTERNATE_ADDRESS frame is formatted as shown in {{fig-saa-format}}.
+
+~~~
+  SERVER_ALTERNATE_ADDRESS Frame {
+   Type (i) = 0xTBD,
+   Sequence Number (i),
+   IPv4 Address (32),
+   IPv4 Port (16),
+   IPv6 Address (128),
+   IPv6 Port (16),
+   Connection ID Length (8),
+   Connection ID (..),
+   Stateless Reset Token (128),
+  }
+
+~~~
+{: #fig-saa-format title="SERVER_ALTERNATE_ADDRESS Frame Format"}
+
 
 
 
