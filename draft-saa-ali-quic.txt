@@ -142,19 +142,19 @@ Table of Contents
 2.2.  Censorship Circumvention
 
    In restrictive environments where QUIC endpoints are subject to IP-
-   based blocking, dynamic server migration can be a powerful evasion
-   technique.  The server can periodically shift its active connection
-   footprint across a large IPv6 space or a pool of IPv4 addresses,
-   sending SAA frames to inform clients in real time.  This strategy can
-   effectively outpace the censor’s ability to blacklist IP addresses
-   (as these IP addresses can be innumerable and ephemeral) and offers
-   better adaptability than static transport-layer obfuscation methods.
+   based blocking, server migration can be a powerful evasion technique.
+   The server can periodically shift its active connection footprint
+   across a large IPv6 space or a pool of IPv4 addresses, sending SAA
+   frames to inform clients in real time.  This strategy can effectively
+   outpace the censor’s ability to blacklist IP addresses (as these IP
+   addresses can be ephemeral) and offers better adaptability than
+   static transport-layer obfuscation methods.
 
-   MASQUE proxies, built on QUIC, can leverage this capability to
-   provide censorship-resistant tunnels.  By continuously migrating the
-   IP addresses of upstream egress proxies, MASQUE clients can maintain
-   long-lived QUIC connections through transient network paths that
-   evade IP-based filtering.
+   MASQUE proxies can leverage this capability to provide censorship-
+   resistant tunnels.  By continuously migrating the IP addresses of
+   upstream egress proxies, MASQUE clients can maintain long-lived QUIC
+   connections through transient network paths that evade IP-based
+   filtering.
 
 2.3.  Mid-Connection Load Balancing
 
