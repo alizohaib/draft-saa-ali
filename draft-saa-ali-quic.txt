@@ -16,11 +16,11 @@ Abstract
    This document proposes an extension to the QUIC transport protocol to
    enable mid-connection server-side migration.  It defines a new QUIC
    frame, the SERVER_ALTERNATE_ADDRESS frame, allowing servers to
-   dynamically advertise alternate IP addresses to clients.  This
-   extension supports use cases such as privacy-preserving address
-   rotation, censorship circumvention, and mid-connection load
-   balancing, expanding beyond the one-time preferred address feature
-   defined in RFC 9000.
+   dynamically advertise alternate addresses to clients.  This extension
+   supports use cases such as privacy-preserving address rotation,
+   censorship circumvention, and mid-connection load balancing,
+   expanding beyond the one-time preferred address feature defined in
+   RFC 9000.
 
 About This Document
 
@@ -73,12 +73,13 @@ Table of Contents
      2.2.  Censorship Circumvention
      2.3.  Mid-Connection Load Balancing
      2.4.  Graceful Failover and Maintenance
-   3.  Conventions and Definitions
-   4.  Security Considerations
-   5.  IANA Considerations
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+   3.  Server Alternate Address Frame
+   4.  Conventions and Definitions
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -174,7 +175,25 @@ Table of Contents
    replacement node.  Because migration occurs at the transport level,
    application-layer sessions remain uninterrupted.
 
-3.  Conventions and Definitions
+3.  Server Alternate Address Frame
+
+   SERVER_ALTERNATE_ADDRESS frame is formatted as shown in Figure 1.
+
+     SERVER_ALTERNATE_ADDRESS Frame {
+      Type (i) = 0xTBD,
+      Sequence Number (i),
+      IPv4 Address (32),
+      IPv4 Port (16),
+      IPv6 Address (128),
+      IPv6 Port (16),
+      Connection ID Length (8),
+      Connection ID (..),
+      Stateless Reset Token (128),
+     }
+
+              Figure 1: SERVER_ALTERNATE_ADDRESS Frame Format
+
+4.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -182,17 +201,17 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-4.  Security Considerations
+5.  Security Considerations
 
    TODO Security
 
-5.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -203,7 +222,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [QUIC]     Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
