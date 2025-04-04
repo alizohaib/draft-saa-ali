@@ -26,11 +26,11 @@ author:
     fullname: Ali Zohaib
     organization: UMass Amherst
     email: "azohaib@umass.edu"
-    
+ -
     fullname: Eric Wustrow
     organization: University of Colorado Boulder
     email: "ewust@colorado.edu"
-    
+ -  
     fullname: Amir Houmansadr
     organization: UMass Amherst
     email: "amir@cs.umass.edu"
