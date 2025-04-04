@@ -22,18 +22,16 @@ venue:
   latest: "https://alizohaib.github.io/draft-saa-ali/draft-saa-ali-quic.html"
 
 author:
- -
-    fullname: Ali Zohaib
+  - fullname: Ali Zohaib
     organization: UMass Amherst
     email: "azohaib@umass.edu"
-    -
-    fullname: Eric Wustrow
+  - fullname: Eric Wustrow
     organization: University of Colorado Boulder
     email: "ewust@colorado.edu"
-    -
-    fullname: Amir Houmansadr
+  - fullname: Amir Houmansadr
     organization: UMass Amherst
     email: "amir@cs.umass.edu"
+
 
 normative:
 
